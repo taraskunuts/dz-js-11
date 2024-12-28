@@ -1,69 +1,95 @@
-const giveMessage = () => {
-  console.log("Hello World")}
-giveMessage()
-//
-//
-//
-function makeRandomNumber(){
-  const randomNumber = Math.random() * (100 - 1)
-  return randomNumber
-}
-const value = makeRandomNumber()
-let guessNumber = 0;
-for (let i = 0;i < 5;i++ ) {//для вільної перевірки коду
-  guessNumber = prompt("Вгадайте число(Впишіть число!)");
-  if (guessNumber === value) {
-    alert("Ви вгадали");
-    if(i === 5){
-      break
+alert("Вибачте за затримку цього дз, у мене виникли труднощі з нормальним додаванням балансу і промпта")
+const bankAccount = {
+    ownerName: "Oleg",
+    accountNumber: "UA1234567890",
+    balance: 500,
+    deposit(amount) {
+      this.balance += amount
+      alert(`Ваш новий баланс: ${this.balance} грн.`)
+    },
+    withdraw(amount) {
+      if (amount > this.balance) {
+        if (!confirm(`Недостатньо коштів! Ваш баланс стане від'ємним. Продовжити?`)) return
+      }
+      this.balance -= amount
+      alert(`Ваш новий баланс: ${this.balance} грн.`)
+    }
+  };
+
+  if (confirm("Натисніть 'OK', щоб поповнити рахунок, або 'Скасувати', щоб зняти кошти.")) {
+    const amount = parseInt(prompt("Введіть суму для поповнення:"))
+    if (amount > 0) {
+      bankAccount.deposit(amount)
+    } else {
+      alert("Некоректна сума!")
     }
   } else {
-    alert("Ви НЕ вгадали");
-    if(i === 5){
-      break
+    const amount = parseInt(prompt("Введіть суму для зняття:"))
+    if (amount > 0) {
+      bankAccount.withdraw(amount)
+    } else {
+      alert("Некоректна сума!")
     }
   }
+//
+//
+//
+//для дз з об'єктами буду використовувати 4 пропуски
+const weather = {
+    temperature: prompt('яка температура?'),
+    humidity: 80,
+    windSpeed: 10,
+    isBelowZero() {
+      return this.temperature < 0
+    }
+  };
+  if (weather.isBelowZero()) {
+    alert("Температура нижче 0 градусів Цельсія");
+  } else {
+    alert("Температура вище або дорівнює 0 градусів Цельсія")
 }
 //
 //
 //
-let gettingNumber = confirm("Натискайте <OK>")
-let countOfNumber = 0;
-do{
-    let gettingNumber = confirm("Продовжуйте натискайти <OK>")
-    countOfNumber++
-    if(countOfNumber >= 5){
-      break
-    }//if зробив для вільної перевірки коду щоб менше возився
-}while(gettingNumber === true)
-console.log(countOfNumber)
 //
-//
-//
-const applyCallbackToEachElement = (arr,callback) =>{
-  let squaredArray = [];
-  for(let i = 0; i < arr.length; i++){
-    let number = arr[i]
-    callback(number)
-    squaredArray.push(number)
+const user = {
+    name: "",
+    email: "",
+    password: "",
+    login(inputEmail, inputPassword) {
+      if (this.email === inputEmail && this.password === inputPassword) {
+        alert("Логін успішний ласкаво просимо " + this.name )
+      } else {
+        alert("Неправильний email або пароль спробуйте ще раз")
+      }
+    }
   }
-  return squaredArray
-}
-const arr = [1,2,3,4,5]
-const squareCallback = (number) => {
-  const squareResult = number*number
-  return squareResult
-};
-const result = applyCallbackToEachElement(arr,squareCallback)
-console.log(result)
+  user.name = prompt("Введіть ваше імя");
+  user.email = prompt("Введіть ваш email")
+  user.password = prompt("Введіть ваш пароль")
+  const inputEmail = prompt("Для входу введіть ваш email")
+  const inputPassword = prompt("Для входу введіть ваш пароль")
+  user.login(inputEmail, inputPassword)
 //
 //
 //
-const calculateDiscountPrice = (price, discount, callback) => {
-  const discountedPrice = price - (price * discount / 100)
-  callback(discountedPrice)
-};   
-const showDiscountedPrice = (discountedPrice) => {
-  console.log(`Дисконтна ціна ${discountedPrice} грн`)
-};
-calculateDiscountPrice(100, 10, showDiscountedPrice);
+//
+// const movie = {
+//     title: "Inception",
+//     director: "Крістофер Нолан",
+//     year: 2010,
+//     rating: 8.8,
+//     isHighlyRated() {
+//       return this.rating > 8
+//     }
+//   }
+//   console.log("Назва:", movie.title)
+//   console.log("Режисер:", movie.director)
+//   console.log("Рік випуску:", movie.year)
+//   console.log("Рейтинг:", movie.rating)
+//   if (movie.isHighlyRated()) {
+//     console.log("Рейтинг фільму вище 8: true")
+//   } else {
+//     console.log("Рейтинг фільму вище 8: false")
+//   }
+//ой
